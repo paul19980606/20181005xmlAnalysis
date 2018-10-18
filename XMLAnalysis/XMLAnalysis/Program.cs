@@ -23,7 +23,7 @@ namespace XMLAnalysis
             var xml = XElement.Load(@"C:\Users\User\source\repos\paul19980606\20181005xmlAnalysis\XMLAnalysis\Gov_Case.xml");
 
             var Gov_Cases = xml.Descendants("Gov_Case").ToList();
-
+            /*
             for (var i = 0; i < Gov_Cases.Count; i++)
             {
                 var Gov_Case_data = Gov_Cases[i];
@@ -34,7 +34,18 @@ namespace XMLAnalysis
                 item.縣市 = getValue(Gov_Case_data, "縣市");
                 result.Add(item);
             };
+            */
             //分支0
+            Gov_Cases.ToList()
+                .ForEach(Gov_Case_data =>
+                {
+                    OpenData item = new OpenData();
+                    item.年度 = getValue(Gov_Case_data, "年度");
+                    item.案名 = getValue(Gov_Case_data, "案名");
+                    item.縣市 = getValue(Gov_Case_data, "縣市");
+                    result.Add(item);
+                });
+
 
             return result;
         }
