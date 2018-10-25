@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using XML_Analysis.Models;
+using XMLAnalysis.repositories;
 //789
 
 namespace XMLAnalysis
@@ -12,7 +13,15 @@ namespace XMLAnalysis
         static void Main(string[] args)
         {
             var Gov_Cases = findOpenData();
-            ShowOpenData(Gov_Cases);
+            Srepository aa = new Srepository();
+            var dbconn = aa.connect();
+            Gov_Cases.ForEach(data =>
+                {
+                    aa.Sql_Insert(dbconn , data);
+                });
+
+
+            //ShowOpenData(Gov_Cases);
             Console.ReadKey();
         }
 
